@@ -121,6 +121,7 @@ public class UserDAO implements IUserDAO{
         return rowUpdate;
     }
 
+
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
             if (e instanceof SQLException) {
@@ -135,5 +136,31 @@ public class UserDAO implements IUserDAO{
                 }
             }
         }
+    }
+
+
+    @Override
+    public List<User> findByCountry(String country) throws SQLException{
+        List<User>  findList = new ArrayList<>();
+
+        try(Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
+
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                if (country.equals(rs.getString("country"))) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String email = rs.getString("email");
+                    String countryFind = rs.getString("country");
+                    findList.add(new User(id, name, email, countryFind));
+                }
+            }
+
+        }
+        return findList;
     }
 }
