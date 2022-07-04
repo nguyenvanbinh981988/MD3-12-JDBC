@@ -76,6 +76,9 @@ public class UserServlet extends HttpServlet {
                 case "find":
                     showFindByCountry(request, response);
                     break;
+                case "sort":
+                    showSortByName(request, response);
+                    break;
                 default:
                     listUser(request, response);
                     break;
@@ -162,6 +165,13 @@ public class UserServlet extends HttpServlet {
         String country = request.getParameter("country");
         List<User> listFind = userDAO.findByCountry(country);
         request.setAttribute("listFind", listFind);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/findlist.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    public void showSortByName(HttpServletRequest request,HttpServletResponse response) throws IOException,SQLException,ServletException{
+        List<User> listUser = userDAO.sortByName();
+        request.setAttribute("listUser", listUser);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/list.jsp");
         requestDispatcher.forward(request, response);
     }

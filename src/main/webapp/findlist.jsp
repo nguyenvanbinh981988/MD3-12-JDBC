@@ -15,16 +15,12 @@
 <center>
     <h1>User Management</h1>
     <h2>
-        <a href="/users?action=create">Add New User</a>
-        <br>
-        <a href="/users?action=find">find user by country</a>
-        <br>
-        <a href="/users?action=sort">sorted by Name</a>
+        <a href="/users?action=create">Danh sách tìm được</a>
     </h2>
 </center>
 <div align="center">
     <table border="1" cellpadding="5">
-        <caption><h2>List of Users</h2></caption>
+        <caption><h2>List of Find</h2></caption>
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -32,16 +28,12 @@
             <th>Country</th>
             <th>Actions</th>
         </tr>
-        <c:forEach var="user" items="${listUser}">
+        <c:forEach var="user" items="${listFind}">
             <tr>
                 <td><c:out value="${user.id}"/></td>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.country}"/></td>
-                <td>
-                    <a href="/users?action=edit&id=${user.id}">Edit</a>
-                    <a href="/users?action=delete&id=${user.id}">Delete</a>
-                </td>
             </tr>
         </c:forEach>
     </table>

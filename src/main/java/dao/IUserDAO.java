@@ -17,4 +17,6 @@ public interface IUserDAO {
     public boolean updateUser(User user) throws SQLException;
 
     public List<User> findByCountry(String country) throws SQLException;
+
+    public List<User> sortByName() throws SQLException;
 }
